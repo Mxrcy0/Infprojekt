@@ -11,7 +11,12 @@ $conn = mysqli_connect($myServer, $myUser, $myPass)
   or die("Couldn't connect to SQL Server on $myServer");
 echo "connected successfully";
 
-$pID = $_POST['pID'];
+// get the data from the JavaScript file
+$data = json_decode(file_get_contents("php://input"));
+
+// access the variables
+$elo = $data->elo;
+$pID = $data->pID;
 
 $sql = "SELECT elo FROM player WHERE pID = $pID";
 $result = $conn->query($sql);

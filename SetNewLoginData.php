@@ -10,9 +10,11 @@ $myDB = "u681823632_iratasdatabase";
 $conn = mysqli_connect($myServer, $myUser, $myPass)
   or die("Couldn't connect to SQL Server on $myServer");
 
-//get the users chosen name and password from the html file
-$username = $_POST['username'];
-$passw = $_POST['passw'];
+// get the data from the JavaScript file
+$data = json_decode(file_get_contents("php://input"));
+// access the variables
+$username = $data->username;
+$passw = $data->passw;
 
 //set the elo rating to the standard value of 1000
 $elo = 1000;

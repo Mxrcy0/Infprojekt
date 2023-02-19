@@ -12,8 +12,11 @@ $conn = mysqli_connect($myServer, $myUser, $myPass)
 echo "connected successfully";
 
 //store data created in the html file 
-$username = $_POST['username'];
-$passw = $_POST['passw'];
+$data = json_decode(file_get_contents("php://input"));
+
+// access the variables
+$username = $data->username;
+$passw = $data->passw;
 
 //try to find a user with the same password and username that were input
 $sql = "SELECT  username, passw, pID FROM player WHERE username = $username AND passw = $passw";
