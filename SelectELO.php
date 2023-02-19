@@ -11,15 +11,17 @@ $conn = mysqli_connect($myServer, $myUser, $myPass)
   or die("Couldn't connect to SQL Server on $myServer");
 echo "connected successfully";
 
-
 $pID = $_POST['pID'];
 
 $sql = "SELECT elo FROM player WHERE pID = $pID";
 $result = $conn->query($sql);
 
-
+//store the result on the $elo variable and then return it using the json_encode function
+$elo_row = mysqli_fetch_array($result);
+$elo = $elo_row['elo'];
+$response_array['elo'] = $elo;
+echo json_encode($response_array);
 
 //close connection to database
 mysqli_close($conn)
 ?>
-//not done

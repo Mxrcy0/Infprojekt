@@ -18,14 +18,21 @@ $passw = $_POST['passw'];
 $elo = 1000;
 
 //generate the players ID
-//here we take the last registred player's id and ad one to it
-$pID = "SELECT pID * player ORDER BY pID DESC LIMIT 1" + 1;
+//here we take the last registred player's id and ad one to it in order to create a new ID
+$pID_query = "SELECT pID FROM player ORDER BY pID DESC LIMIT 1";
+$pID_result = $conn->query($pID_query);
+$pID_row = mysqli_fetch_array($pID_result);
+$pID = $pID_row['pID'] + 1;
 
 //insert the data collected above into the database
 $sql = "INSERT INTO player (pID, passw, username, elo)
 VALUES ($pID, $passw, $username, $elo)";
 $result = $conn->query($sql);
 
+//if data was not input into the database, return an error
+if(!$result) {
+  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
 //close connection to database
 mysqli_close($conn)
 ?>

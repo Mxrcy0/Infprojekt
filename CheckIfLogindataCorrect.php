@@ -11,15 +11,27 @@ $conn = mysqli_connect($myServer, $myUser, $myPass)
   or die("Couldn't connect to SQL Server on $myServer");
 echo "connected successfully";
 
+//store data created in the html file 
 $username = $_POST['username'];
-
 $passw = $_POST['passw'];
 
-$sql = "SELECT  username, passw FROM player WHERE username = $username AND passw = $passw";
+//try to find a user with the same password and username that were input
+$sql = "SELECT  username, passw, pID FROM player WHERE username = $username AND passw = $passw";
 $result = $conn->query($sql);
 
+//check if a user with the same password and username that were input, if so, return true, if not, return false
+//if a user with the given username and password exists, also return the users ID
+//note that all of the returned data is stored in an array called response_array
 if ($result->num_rows != 0){
   $is_true = true;
+  $pID_row = mysqli_fetch_array($result);
+  $pID = $pID_row['pID'];
+
+  $response_array['is_true'] = $is_true;
+  $response_array['pID'] = $pID;
+  echo json_encode($response_array);
+}else{
+  $is_true = false;
   $response_array['is_true'] = $is_true;
   echo json_encode($response_array);
 }

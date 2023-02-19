@@ -14,17 +14,15 @@ echo "connected successfully";
 //variables, which are fed into database after having been entered by the user
 $pID = $_POST['pID'];
 $hscore = $_POST['hscore'];
-$lscore = $_POST['lscore'];
 
 //feed the data which is stored on the variables into the database
-$sql = "INSERT INTO score (pID, hscore, lscore ) VALUES ($pID, $hscore, $lscore)";
-
+$sql = "INSERT INTO score (pID, hscore) VALUES ($pID, $hscore)";
+$result = $conn->query($sql);
 //check if the data was inserted, if not, return an error which describes the problem that occured
-if ($conn->query($sql) !== TRUE) {
+if (!$result) {
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
 //close connection to database
 mysqli_close($conn)
 ?>
-//not done
