@@ -12,17 +12,26 @@ $conn = mysqli_connect($myServer, $myUser, $myPass)
 echo "connected successfully";
 
 //variables, which are fed into database after having been entered by the user
-$pID = $_POST['pID'];
-$hscore = $_POST['hscore'];
+$data = json_decode(file_get_contents("php://input"));
+$pID = $data->pID;
+$score = $data->score;
 
-//feed the data which is stored on the variables into the database
-$sql = "INSERT INTO score (pID, hscore) VALUES ($pID, $hscore)";
-$result = $conn->query($sql);
-//check if the data was inserted, if not, return an error which describes the problem that occured
-if (!$result) {
-  echo "Error: " . $sql . "<br>" . $conn->error;
+//check what the players current highscore is and store it on curr_hscore
+$score_query = "SELECT hscore FROM score WHERE pID = $pID";
+$score_result = $conn->query($score_query);
+$score_row = mysqli_fetch_array($score_result);
+$curr_hscore = $score_row['pID'];
+
+//if the players last score is higher than their current highscore, overwrite the highscore in the database
+if($score > $curr_hscore){
+  //feed the data which is stored on the variables into the database
+  $sql = "INSERT INTO score (pID, hscore) VALUES ($pID, $score)";
+  $result = $conn->query($sql);
+  //check if the data was inserted, if not, return an error which describes the problem that occured
+  if (!$result) {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
 }
-
 //close connection to database
 mysqli_close($conn)
 ?>
