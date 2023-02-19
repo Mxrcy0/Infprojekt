@@ -24,7 +24,7 @@ $new_elo = $elo_row['elo'];
 
 //if the players last score is higher than their current highscore, overwrite the highscore in the database
 //feed the data which is stored on the variables into the database
-$sql = "INSERT INTO score (pID, hscore) VALUES ($pID, $score)";
+$sql = "UPDATE TABLE player SET elo = $elo WHERE pID = $pID";
 $result = $conn->query($sql);
 //check if the data was inserted, if not, return an error which describes the problem that occured
 if (!$result) {

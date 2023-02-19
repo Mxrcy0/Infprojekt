@@ -25,7 +25,7 @@ $curr_hscore = $score_row['pID'];
 //if the players last score is higher than their current highscore, overwrite the highscore in the database
 if($score > $curr_hscore){
   //feed the data which is stored on the variables into the database
-  $sql = "INSERT INTO score (pID, hscore) VALUES ($pID, $score)";
+  $sql = "UPDATE TABLE score SET hscore = $score WHERE pID = $pID";
   $result = $conn->query($sql);
   //check if the data was inserted, if not, return an error which describes the problem that occured
   if (!$result) {

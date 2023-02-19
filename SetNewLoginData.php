@@ -27,12 +27,16 @@ $pID_row = mysqli_fetch_array($pID_result);
 $pID = $pID_row['pID'] + 1;
 
 //insert the data collected above into the database
-$sql = "INSERT INTO player (pID, passw, username, elo)
+$sqlplayer = "INSERT INTO player (pID, passw, username, elo)
 VALUES ($pID, $passw, $username, $elo)";
-$result = $conn->query($sql);
+$resultplayer = $conn->query($sqlplayer);
+//we also create an entry in the score table with the current highscore being 0
+$sqlscore = "INSERT INTO score (pID, hscore)
+VALUES ($pID, 0)";
+$resultscore = $conn->query($sqlscore);
 
 //if data was not input into the database, return an error
-if(!$result) {
+if(!$resultplayer or !$resultscore) {
   echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 //close connection to database
