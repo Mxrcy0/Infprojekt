@@ -15,7 +15,6 @@ echo "connected successfully";
 $data = json_decode(file_get_contents("php://input"));
 
 // access the variables
-$elo = $data->elo;
 $pID = $data->pID;
 
 $sql = "SELECT elo FROM player WHERE pID = $pID";
