@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        html,body
+        {
+            background-color: darkblue;
+        }
+        h1
+        {
+            text-align: center;
+        }
+        .container 
+        { 
+            height: 300px; 
+            max-width: 700px;
+            margin: auto;
+            position: relative; 
+            background-color: white;
+            border: 3px solid grey; 
+        }
+
+        .center 
+        {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <title>Login</title>
+    <h1 style="font-size: 100px; color: white;">
+        Login
+    </h1>
+</head>
+<body>
+    <div class="container">
+        <div class="center">
+            <form action="form.php" method="post">
+                <table>
+                    <tr>
+                        <td> Username: </td>
+                        <td> <input type="text" name="username" id="username"> </td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input type="password" name="password" id="password"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="submit" id="submit" value="Login"></td>
+                        <td>New Member? <a href="Registration.html">Register</a></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <script>
+        const data = {
+            username: "username",
+            passw: "password",
+        };
+        // send the data to the PHP file
+        fetch("NAME-VOM-PHP-FILE.php", {
+            method: "POST",
+            body: JSON.stringify(data)
+        })
+        .then(response => response.text())
+        .then(data => {
+        // do something with the response from the PHP file
+        });
+    </script>
+</body>
+</html>

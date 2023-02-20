@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        html,body
+        {
+            background-color: darkblue;
+        }
+        h1
+        {
+            text-align: center;
+        }
+        .container 
+        { 
+            height: 300px; 
+            max-width: 700px;
+            margin: auto;
+            position: relative; 
+            background-color: white;
+            border: 3px solid grey; 
+        }
+
+        .center 
+        {
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <title>Registration</title>
+    <h1 style="font-size: 100px; color: white;">
+        Registration
+    </h1>
+</head>
+<body>
+    <div class="container">
+        <div class="center">
+            <form>
+                <table>
+                    <tr>
+                        <td> Username: </td>
+                        <td> <input class="username" type="text" placeholder="Username" name="username" id="username"> </td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input class="password" type="password" placeholder="Password" name="password" id="password"></td>
+                    </tr>
+                    <tr>
+                        <td>Confirm Password:</td>
+                        <td><input class="password2" type="password" placeholder="Confirm Password" name="password2" id="password2"></td>
+                    </tr>
+                    <tr>
+                        <td><button class="button" type="submit" name="submit" id="submit"> Create Account </button></td>
+                        <td>Already a Member? <a href="LoginScreen.html">Login</a></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.querySelector('.button').onclick = function()
+        {
+            var password = document.querySelector('.password').value,
+                password2 = document.querySelector('.password2').value,
+                username = document.querySelector('.username').value;
+            
+            if(password == "" || password2 == "" || username == "")
+            {
+                alert("Field cannot be empty.");
+            }
+            else if(password != password2)
+            {
+                alert("Passwords didn't match.");
+            }
+        }
+    </script>
+</body>
+</html>
